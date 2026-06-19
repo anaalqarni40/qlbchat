@@ -2091,6 +2091,59 @@ body.kbd-open .pvbox-msgs .row.msg .qmav{
   max-height:var(--qlb-chat-avatar)!important;
 }
 </style>
+<style id="qlb-skin-message-avatar-grid">
+/* توحيد تموضع أفتار رسالة العضو مع أفتارات التنبيهات */
+#chat .row.msg:not(.wel):not(.notif){
+  display:grid!important;
+  grid-template-columns:58px minmax(0,1fr) auto!important;
+  column-gap:3px!important;
+  align-items:center!important;
+  padding:0 0 0 4px!important;
+  min-height:58px!important;
+}
+#chat .row.msg:not(.wel):not(.notif) .qmav{
+  grid-column:1!important;
+  grid-row:1!important;
+  justify-self:start!important;
+  align-self:center!important;
+  margin:0!important;
+  flex:none!important;
+  width:58px!important;
+  height:58px!important;
+  min-width:58px!important;
+  max-width:58px!important;
+  min-height:58px!important;
+  max-height:58px!important;
+}
+#chat .row.msg:not(.wel):not(.notif) .meta{
+  grid-column:2!important;
+  grid-row:1!important;
+  min-width:0!important;
+  align-self:center!important;
+  padding:0!important;
+  margin:0!important;
+}
+#chat .row.msg:not(.wel):not(.notif) .qlb-corner{
+  grid-column:3!important;
+  grid-row:1!important;
+  align-self:center!important;
+  justify-self:end!important;
+  margin:0!important;
+}
+body.kbd-open #chat .row.msg:not(.wel):not(.notif){
+  grid-template-columns:58px minmax(0,1fr) auto!important;
+  min-height:58px!important;
+}
+body.kbd-open #chat .row.msg:not(.wel):not(.notif) .qmav{
+  width:58px!important;
+  height:58px!important;
+  min-width:58px!important;
+  max-width:58px!important;
+  min-height:58px!important;
+  max-height:58px!important;
+  margin:0!important;
+}
+</style>
 <style id="qlb-skin-members-space">
 /* قائمة الأعضاء: المسافة بين النك والحالة = محاكاة قلب (النك أعلى، الحالة أسفل) */
 #d-members .mitem .qinfo{justify-content:space-between!important;align-self:stretch!important;padding:3px 0!important;gap:0!important;}
