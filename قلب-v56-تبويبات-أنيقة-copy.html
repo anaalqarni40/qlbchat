@@ -2151,6 +2151,81 @@ body.kbd-open #chat .row.notif{
   min-height:58px!important;
 }
 </style>
+<style id="qlb-skin-room-action-buttons">
+/* أزرار رسائل الغرف: خانة متلاصقة مثل المرجع، لكن بألوان هوية شات قلب */
+#chat .row.msg:not(.wel) .wp-acts{
+  position:static!important;
+  display:inline-flex!important;
+  direction:ltr!important;
+  align-items:stretch!important;
+  justify-content:flex-end!important;
+  gap:0!important;
+  height:26px!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:1px solid #0f4a52!important;
+  border-radius:2px!important;
+  background:#0f4a52!important;
+  box-shadow:0 1px 2px rgba(0,0,0,.12)!important;
+}
+#chat .row.msg:not(.wel) .wp-b{
+  width:30px!important;
+  min-width:30px!important;
+  height:24px!important;
+  min-height:24px!important;
+  border:0!important;
+  border-inline-start:1px solid rgba(255,255,255,.24)!important;
+  border-radius:0!important;
+  margin:0!important;
+  padding:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:#fff!important;
+  background:linear-gradient(180deg,#197784,#0f5d66)!important;
+  box-shadow:none!important;
+}
+#chat .row.msg:not(.wel) .wp-b:first-child{border-inline-start:0!important;}
+#chat .row.msg:not(.wel) .wp-b svg{
+  width:15px!important;
+  height:15px!important;
+  stroke-width:2.1!important;
+}
+#chat .row.msg:not(.wel) .wp-b.del{
+  background:linear-gradient(180deg,#e05a55,#b93c38)!important;
+}
+#chat .row.msg:not(.wel) .wp-b.rep{
+  background:linear-gradient(180deg,#2a96a8,#15616d)!important;
+  color:#fff!important;
+}
+#chat .row.msg:not(.wel) .wp-b.like{
+  background:linear-gradient(180deg,#2a96a8,#15616d)!important;
+  color:#fff!important;
+}
+#chat .row.msg:not(.wel) .wp-b.like.on{
+  background:linear-gradient(180deg,#e05a55,#b93c38)!important;
+  color:#fff!important;
+}
+#chat .row.msg:not(.wel) .wp-b.like.on svg{fill:#fff!important;}
+#chat .row.msg:not(.wel) .wp-b .ct{
+  top:1px!important;
+  right:1px!important;
+  min-width:10px!important;
+  height:10px!important;
+  line-height:10px!important;
+  padding:0 2px!important;
+  border-radius:2px!important;
+  background:var(--c-gold)!important;
+  color:#0f4a52!important;
+  font-size:7px!important;
+  font-weight:900!important;
+}
+#chat .row.msg:not(.wel) .qlb-corner{
+  gap:4px!important;
+  align-items:flex-end!important;
+}
+</style>
 <style id="qlb-skin-members-space">
 /* قائمة الأعضاء: المسافة بين النك والحالة = محاكاة قلب (النك أعلى، الحالة أسفل) */
 #d-members .mitem .qinfo{justify-content:space-between!important;align-self:stretch!important;padding:3px 0!important;gap:0!important;}
