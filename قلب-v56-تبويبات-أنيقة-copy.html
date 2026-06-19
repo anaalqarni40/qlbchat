@@ -2041,6 +2041,56 @@ body.kbd-open .pvbox-msgs .row.msg .qmav img{
   object-fit:cover!important;
 }
 </style>
+<style id="qlb-skin-fixed-avatars-58">
+/* تثبيت أفتارات الصفحة الداخلية: مقاس واحد لا يتغير مع فتح/إغلاق لوحة الكتابة */
+:root{--qlb-chat-avatar:58px;}
+#chat .row.msg:not(.wel) .qmav,
+#chat .row.notif .av,
+#chat .row.msg.wel .wel-av,
+.pvbox-msgs .row.msg .qmav{
+  flex:0 0 var(--qlb-chat-avatar)!important;
+  width:var(--qlb-chat-avatar)!important;
+  min-width:var(--qlb-chat-avatar)!important;
+  max-width:var(--qlb-chat-avatar)!important;
+  height:var(--qlb-chat-avatar)!important;
+  min-height:var(--qlb-chat-avatar)!important;
+  max-height:var(--qlb-chat-avatar)!important;
+  aspect-ratio:1/1!important;
+  align-self:center!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  transform:none!important;
+}
+#chat .row.msg:not(.wel) .qmav img,
+#chat .row.notif .av img,
+#chat .row.msg.wel .wel-av img,
+.pvbox-msgs .row.msg .qmav img{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:cover!important;
+  display:block!important;
+}
+#chat .row.msg:not(.wel),
+#chat .row.notif{
+  min-height:var(--qlb-chat-avatar)!important;
+  align-items:center!important;
+  overflow:hidden!important;
+}
+body.kbd-open #chat .row.msg:not(.wel) .qmav,
+body.kbd-open #chat .row.notif .av,
+body.kbd-open #chat .row.msg.wel .wel-av,
+body.kbd-open .pvbox-msgs .row.msg .qmav{
+  flex-basis:var(--qlb-chat-avatar)!important;
+  width:var(--qlb-chat-avatar)!important;
+  min-width:var(--qlb-chat-avatar)!important;
+  max-width:var(--qlb-chat-avatar)!important;
+  height:var(--qlb-chat-avatar)!important;
+  min-height:var(--qlb-chat-avatar)!important;
+  max-height:var(--qlb-chat-avatar)!important;
+}
+</style>
 <style id="qlb-skin-members-space">
 /* قائمة الأعضاء: المسافة بين النك والحالة = محاكاة قلب (النك أعلى، الحالة أسفل) */
 #d-members .mitem .qinfo{justify-content:space-between!important;align-self:stretch!important;padding:3px 0!important;gap:0!important;}
