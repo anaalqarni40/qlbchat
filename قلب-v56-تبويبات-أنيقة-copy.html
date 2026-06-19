@@ -1981,6 +1981,58 @@ body,.app,.gate,.gate *,.chat,.drawer,.drawer *,#pvbox,#pvbox *,.composer,.compo
   gap:3px!important;
 }
 </style>
+<style id="qlb-skin-keyboard-fluid">
+/* مرونة الكيبورد: ارتفاع التطبيق يتبع الشاشة المرئية ويمنع الفراغ الأبيض تحت الشات */
+@media (max-width:600px){
+  html,body{
+    width:100vw!important;
+    height:var(--app-h,var(--vvh,100svh))!important;
+    min-height:var(--app-h,var(--vvh,100svh))!important;
+    overflow:hidden!important;
+  }
+  body{
+    align-items:flex-start!important;
+    justify-content:flex-start!important;
+    overscroll-behavior:none!important;
+  }
+  .phone{
+    height:var(--app-h,var(--vvh,100svh))!important;
+    min-height:0!important;
+  }
+  .screen,.chat{
+    height:100%!important;
+    min-height:0!important;
+  }
+  .content{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    overflow-y:auto!important;
+  }
+  .composer,.nav{
+    flex:0 0 auto!important;
+  }
+}
+body.kbd-open #chat .row.msg:not(.wel){
+  min-height:48px!important;
+}
+body.kbd-open #chat .row.msg:not(.wel) .qmav,
+body.kbd-open .pvbox-msgs .row.msg .qmav{
+  flex:0 0 48px!important;
+  width:48px!important;
+  min-width:48px!important;
+  max-width:48px!important;
+  height:48px!important;
+  min-height:48px!important;
+  max-height:48px!important;
+  align-self:center!important;
+}
+body.kbd-open #chat .row.msg:not(.wel) .qmav img,
+body.kbd-open .pvbox-msgs .row.msg .qmav img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+}
+</style>
 <style id="qlb-skin-members-space">
 /* قائمة الأعضاء: المسافة بين النك والحالة = محاكاة قلب (النك أعلى، الحالة أسفل) */
 #d-members .mitem .qinfo{justify-content:space-between!important;align-self:stretch!important;padding:3px 0!important;gap:0!important;}
@@ -4508,17 +4560,17 @@ function openPrivateRefresh(name){renderPriv(name);}
 /* عند الكتابة: تمرير الرسائل لأسفل فوق الكيبورد حتى يرى المستخدم كلامه */
 (function(){
  if(document.__kbdwired)return;document.__kbdwired=1;
- function scrollToInput(t){
-   setTimeout(function(){
-     // مرر منطقة الرسائل النشطة لأسفل
-     var pv=document.getElementById('pvmsgs');var rm=document.getElementById('msgs');
-     if(pv&&pv.offsetParent!==null)pv.scrollTop=1e9;
-     if(rm&&rm.offsetParent!==null)rm.scrollTop=1e9;
-     // اجعل الحقل نفسه مرئيًا داخل الشاشة
-     if(t&&t.scrollIntoView)t.scrollIntoView({block:'center',behavior:'smooth'});
-   },320);
+ function scrollActiveMsgs(){
+   var room=document.getElementById('content');
+   var pv=document.getElementById('pvmsgs');
+   if(pv&&pv.offsetParent!==null)pv.scrollTop=pv.scrollHeight;
+   if(room&&room.offsetParent!==null)room.scrollTop=room.scrollHeight;
  }
- document.addEventListener('focusin',function(e){var t=e.target;if(t&&(t.id==='inp'||t.id==='pvInp'))scrollToInput(t);});
+ function scrollToInput(){
+   setTimeout(function(){scrollActiveMsgs();},320);
+ }
+ document.addEventListener('focusin',function(e){var t=e.target;if(t&&(t.id==='inp'||t.id==='pvInp')){document.body.classList.add('kbd-open');scrollToInput();}});
+ document.addEventListener('focusout',function(e){var t=e.target;if(t&&(t.id==='inp'||t.id==='pvInp'))setTimeout(function(){if(!document.activeElement||!(/^(inp|pvInp)$/.test(document.activeElement.id||'')))document.body.classList.remove('kbd-open');},120);});
 })();
 function pvRow(m,name,other){const who=m.anon?'مجهول 🕵️':(m.me?ME.name:name);const color=m.anon?'#8a98a8':(m.me?ME.color:(other?other.color:'#15616d'));
   const acts='<div class="wp-acts">'+(m.me?'<button class="wp-b del" title="حذف" onclick="privDel('+m.id+')"><span class="ico" data-i="del"></span></button>':'')+
@@ -4586,12 +4638,19 @@ ic();
   }
   function setVVH(){
     var vv=window.visualViewport;
-    var h=(vv&&vv.height)||window.innerHeight;
-    // --vvh للصفحة الخلفية وحدّ الصندوق السفلي: يلامس الخط العلوي للكيبورد
+    var layoutH=window.innerHeight||document.documentElement.clientHeight||0;
+    var rawH=vv?Math.round(vv.height+(vv.offsetTop||0)):layoutH;
+    var h=Math.max(320,Math.min(layoutH||rawH,rawH||layoutH));
+    var kbd=vv&&layoutH&&((layoutH-vv.height-(vv.offsetTop||0))>80);
+    // --app-h هو قاع الشاشة المرئية داخل المتصفح، وليس ارتفاع visualViewport وحده.
     document.documentElement.style.setProperty('--vvh',h+'px');
-    // إبقاء آخر رسالة ظاهرة فوق الكيبورد
-    var pv=document.getElementById('pvmsgs');
+    document.documentElement.style.setProperty('--app-h',h+'px');
+    document.documentElement.style.setProperty('--vvtop',((vv&&vv.offsetTop)||0)+'px');
+    document.body.classList.toggle('kbd-open',!!kbd||(/^(inp|pvInp)$/.test((document.activeElement&&document.activeElement.id)||'')));
+    // إبقاء آخر رسالة فوق شريط الكتابة بدون تحريك الصفحة نفسها
+    var pv=document.getElementById('pvmsgs'),room=document.getElementById('content');
     if(pv&&pv.offsetParent!==null)pv.scrollTop=pv.scrollHeight;
+    if(room&&room.offsetParent!==null)room.scrollTop=room.scrollHeight;
   }
   lockPvh();
   if(window.visualViewport){
