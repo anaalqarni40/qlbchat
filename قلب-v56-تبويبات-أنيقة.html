@@ -2820,6 +2820,15 @@ body.in-chat .nbtn{
 .nbtn:first-child{border-left:1px solid #0b2b3b!important}
 .nbtn.on{background:#254e61!important;color:#fff!important}
 .nbtn svg{width:15px!important;height:15px!important;stroke:currentColor!important}
+.nbtn .nav-emoji{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:15px!important;
+  height:15px!important;
+  font-size:14px!important;
+  line-height:1!important;
+}
 .nbtn .bdg{
   position:static!important;
   transform:none!important;
@@ -2897,9 +2906,9 @@ body.in-chat .nbtn{
       </div>
       <nav class="nav">
         <button class="nbtn" data-nav="members"><span data-i="users"></span><span class="online-count" id="mcount">400</span></button>
-        <button class="nbtn" data-nav="private"><span data-i="mail"></span>خاص<span class="bdg" id="pcount" style="display:none"></span></button>
-        <button class="nbtn" data-nav="rooms"><span data-i="door"></span>الغرف</button>
-        <button class="nbtn" data-nav="wall"><span data-i="wall"></span>الحائط<span class="bdg" id="wcount">3</span></button>
+        <button class="nbtn" data-nav="private"><span class="nav-emoji">💬</span>خاص<span class="bdg" id="pcount" style="display:none"></span></button>
+        <button class="nbtn" data-nav="rooms"><span data-i="users"></span>الغرف</button>
+        <button class="nbtn" data-nav="wall"><span class="nav-emoji">💬</span>الحائط<span class="bdg" id="wcount">3</span></button>
         <button class="nbtn" data-nav="settings"><span data-i="gear"></span>الضبط</button>
       </nav>
       <div id="lbox" onclick="this.classList.remove('on')"><img alt=""></div>
