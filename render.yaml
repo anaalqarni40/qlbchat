@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: arabic-chat
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: SECRET
+        generateValue: true
+      - key: DATA_DIR
+        value: /opt/render/project/data
